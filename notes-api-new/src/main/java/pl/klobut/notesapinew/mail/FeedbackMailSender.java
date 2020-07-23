@@ -22,21 +22,6 @@ public class FeedbackMailSender implements FeedbackSender{
     public FeedbackMailSender(Environment environment) {
         mailSender = new JavaMailSenderImpl();
 
-//        Properties props = new Properties();
-//        props.setProperty("mail.transport.protocol", environment.getProperty("spring.mail.host"));
-//        props.setProperty("mail.host", environment.getProperty("spring.mail.port"));
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.port", "465");
-//        props.put("mail.smtp.protocol", "smtp");
-//        props.put("mail.debug", "true");
-//        props.put("mail.smtp.socketFactory.port", "465");
-//        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-//        props.put("mail.smtp.socketFactory.fallback", "false");
-//        props.put("mail.smtp.starttls.enable", "true");
-//        props.put("mail.smtp.username", "ewelinakobut@gmail.com");
-//        props.put("mail.smtp.password", "Rowerek1");
-//        mailSender.setJavaMailProperties(props);
-
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
