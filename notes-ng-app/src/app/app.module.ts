@@ -15,6 +15,7 @@ import { NoteTextFilterPipe } from './shared/note-text-filter.pipe';
 import {MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatDialogConfig } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login/login.component';
 const appRoutes: Routes = [
   {
     path: 'notes',
@@ -23,6 +24,10 @@ const appRoutes: Routes = [
   {
     path: 'feedback',
     component: FeedbackComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '',
@@ -44,6 +49,7 @@ const appRoutes: Routes = [
     NotFoundComponent,
     NoteComponent,
     NoteTextFilterPipe,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

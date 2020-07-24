@@ -6,6 +6,7 @@ import {FeedbackViewModel} from "../feedback/feedback.component";
 import {LocalNgModuleData} from "@angular/compiler-cli/src/ngtsc/scope";
 import {Note} from "../notes/model/note";
 import {not} from "rxjs/internal-compatibility";
+import {User} from "../notes/model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class ApiService {
   private NOTES_BY_NOTEBOOK_URL = `${this.BASE_URL}\\notes\\byNotebook\\`;
   private SAVE_UPDATE_NOTE_URL = `${this.BASE_URL}\\notes`;
   private DELETE_NOTE_URL=`${this.BASE_URL}\\notes\\`;
+  private LOGIN=`${this.BASE_URL}\\login\\check`;
   constructor(private http: HttpClient) {
   }
 
@@ -55,6 +57,9 @@ export class ApiService {
 
   deleteNote(id:String): Observable<any> {
     return this.http.delete(this.DELETE_NOTE_URL + id);
+  }
+  login(user: User): Observable<any>{
+    return this.http.post(this.LOGIN, user);
   }
 
 }

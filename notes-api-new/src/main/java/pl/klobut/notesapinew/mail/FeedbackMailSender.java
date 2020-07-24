@@ -27,7 +27,8 @@ public class FeedbackMailSender implements FeedbackSender{
         properties.put("mail.smtp.starttls.enable", "true");
         mailSender.setJavaMailProperties(properties);
         mailSender.setHost(environment.getProperty("spring.mail.host"));
-        mailSender.setPort(Integer.parseInt(environment.getProperty("spring.mail.port")));
+//        mailSender.setPort(Integer.parseInt(environment.getProperty("spring.mail.port")));
+        mailSender.setPort(587);
         mailSender.setUsername(environment.getProperty("spring.mail.username"));
         mailSender.setPassword(environment.getProperty("spring.mail.password"));
     }

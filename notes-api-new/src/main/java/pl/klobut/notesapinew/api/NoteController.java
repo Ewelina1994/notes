@@ -31,6 +31,10 @@ public class NoteController {
         this.mapper=mapper;
     }
 
+    @GetMapping("/hej")
+    public String hej() {
+        return "hej";
+    }
     @GetMapping("/all")
     public Iterable<Note> getAll() {
         for (Note n: noteMenager.findAll()

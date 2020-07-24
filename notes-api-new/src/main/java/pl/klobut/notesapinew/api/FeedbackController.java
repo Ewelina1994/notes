@@ -13,7 +13,8 @@ import javax.xml.bind.ValidationException;
 public class FeedbackController {
     private FeedbackSender feedbackSender;
 
-    public FeedbackController(FeedbackSender feedbackSender) {
+    public FeedbackController(FeedbackSender feedbackSender)
+    {
         this.feedbackSender = feedbackSender;
     }
 
