@@ -9,12 +9,14 @@ import {Note} from "../model/note";
 export class NoteComponent implements OnInit {
 
   @Input()
-  note:Note;
+  note: Note;
   @Output()
-  noteUpdate: EventEmitter<Note>= new EventEmitter<Note>();
+  noteUpdate: EventEmitter<Note> = new EventEmitter<Note>();
   @Output()
-  noteDelete: EventEmitter<Note>= new EventEmitter<Note>();
-  constructor() { }
+  noteDelete: EventEmitter<Note> = new EventEmitter<Note>();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     //console.log(this.note.lastModifieddOn);

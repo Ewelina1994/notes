@@ -10,12 +10,13 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {Routes, RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { NoteComponent } from './notes/note/note.component';
-import { NoteTextFilterPipe } from './shared/note-text-filter.pipe';
-import {MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatDialogConfig } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './login/login.component';
+import {NoteComponent} from './notes/note/note.component';
+import {NoteTextFilterPipe} from './shared/note-text-filter.pipe';
+import {MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatDialogConfig} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {LoginComponent} from './login/login.component';
+
 const appRoutes: Routes = [
   {
     path: 'notes',

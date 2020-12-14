@@ -19,20 +19,22 @@ public class NoteMenager {
     @Autowired
     public NoteMenager(NoteRepository noteRepository, NotebookRepository notebookRepository) {
         this.noteRepository = noteRepository;
-        this.notebookRepository=notebookRepository;
+        this.notebookRepository = notebookRepository;
     }
-    public Note findById(Long id){
+
+    public Note findById(Long id) {
 
         return noteRepository.getOne(id);
     }
-//    public Iterable<Note> findById(Long id){
+
+    //    public Iterable<Note> findById(Long id){
 //        return noteRepository.findAllById(Collections.singleton(id));
 //    }
-    public Iterable<Note> findAll(){
+    public Iterable<Note> findAll() {
         return noteRepository.findAll();
     }
 
-    public Note save(Note note){
+    public Note save(Note note) {
         return noteRepository.save(note);
     }
 
@@ -40,7 +42,7 @@ public class NoteMenager {
         noteRepository.deleteById(id);
     }
 
-    public Iterable<Note> findAllByNotebook(Notebook notebook){
+    public Iterable<Note> findAllByNotebook(Notebook notebook) {
         return noteRepository.findAllByNotebook(notebook);
     }
 }

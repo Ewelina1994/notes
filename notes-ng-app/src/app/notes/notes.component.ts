@@ -3,12 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {Notebook} from "./model/notebook";
 import {ApiService} from "../shared/api.service";
 import {Note} from "./model/note";
-import {MatDialog, MatDialogConfig } from '@angular/material';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 interface DialogData {
   email: string;
 }
+
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
@@ -18,9 +19,9 @@ export class NotesComponent implements OnInit {
 
   closeResult = '';
   notebooks: Notebook[] = [];
-  notes:Note[] = [];
+  notes: Note[] = [];
   selectedNotebook: Notebook;
-  newNote2: Note=  {
+  newNote2: Note = {
     id: null,
     lastModifieddOn: null,
     notebook: null,
@@ -30,6 +31,7 @@ export class NotesComponent implements OnInit {
   newNotebook: string;
   serchText: string;
   newNote: string;
+
   //input = document.getElementById("name");
 
   constructor(private apiService: ApiService, public modalService: NgbModal) {
@@ -51,16 +53,17 @@ export class NotesComponent implements OnInit {
     );
   }
 
-  getAllNotes(){
+  getAllNotes() {
     this.apiService.getAllNotes().subscribe(
-      res=>{
-        this.notes=res;
+      res => {
+        this.notes = res;
       },
-      err=>{
+      err => {
         alert("Error downloading the notes");
       }
     );
   }
+
   // input.addEventListener("keyup", function (event) {
   //   if(event.keyCode === 13){
   //     event.preventDefault();
@@ -86,36 +89,40 @@ export class NotesComponent implements OnInit {
     }
   }
 
-  addNotebok(){
+  addNotebok() {
     console.log(this.newNotebook);
     // @ts-ignore
-    let newN: Notebook={
+    let newN: Notebook = {
       name: this.newNotebook,
       id: null,
       nbOfNotes: 0
     };
-     this.apiService.postNotebook(newN).subscribe(
+    this.apiService.postNotebook(newN).subscribe(
       res => {
         newN.id = res.id;
         this.notebooks.push(newN);
       },
-      err => {alert("An error has occurred while saving the notebook");}
+      err => {
+        alert("An error has occurred while saving the notebook");
+      }
     );
   }
 
   updateNotebook(updateNotebook: Notebook) {
     this.apiService.postNotebook(updateNotebook).subscribe(
-      res =>{
+      res => {
 
       },
-      error => {alert("An error has occurence while saving the notebook");}
+      error => {
+        alert("An error has occurence while saving the notebook");
+      }
     );
   }
 
   deleteNotebook(notebook: Notebook) {
-    if(confirm("Are you shure you want to delete this notebook?")){
+    if (confirm("Are you shure you want to delete this notebook?")) {
       this.apiService.deleteNotebook(notebook.id).subscribe(
-        res=>{
+        res => {
           let indexOfNotebook = this.notebooks.indexOf(notebook);
           this.notebooks.splice(indexOfNotebook, 1);
         },
@@ -128,13 +135,13 @@ export class NotesComponent implements OnInit {
 
   deleteNote(note: Note) {
     console.log(note.id);
-    if(confirm("Are you shure you want to delete this note?")){
+    if (confirm("Are you shure you want to delete this note?")) {
       this.apiService.deleteNote('1').subscribe(
-        res=>{
-          let indexOfNote=this.notes.indexOf(note);
+        res => {
+          let indexOfNote = this.notes.indexOf(note);
           this.notes.splice(indexOfNote, 1);
         },
-        err=>{
+        err => {
           alert("Error to delete Note");
         }
       );
@@ -143,15 +150,15 @@ export class NotesComponent implements OnInit {
   }
 
   addNote(notebook: Notebook) {
-    this.newNote2.notebook=notebook;
-   // console.log(this.newNote2);
+    this.newNote2.notebook = notebook;
+    // console.log(this.newNote2);
     this.apiService.saveNote(this.newNote2).subscribe(
-      res=>{
-        this.newNote2.id=res.id;
-        this.newNote2.lastModifieddOn=res.lastModifieddOn;
+      res => {
+        this.newNote2.id = res.id;
+        this.newNote2.lastModifieddOn = res.lastModifieddOn;
         this.notes.push(this.newNote2);
       },
-      err=>{
+      err => {
         alert("Error to add new note")
       }
     );
@@ -159,13 +166,13 @@ export class NotesComponent implements OnInit {
   }
 
   selectNotebook(notebook: Notebook) {
-    this.selectedNotebook=notebook;
+    this.selectedNotebook = notebook;
     this.apiService.getNotesByNootebok(notebook).subscribe(
-      res=>{
-        this.notes=res;
+      res => {
+        this.notes = res;
         console.log(this.notes);
       },
-      err=>{
+      err => {
         alert("Error to read notes of notebook");
       }
     );
@@ -173,14 +180,14 @@ export class NotesComponent implements OnInit {
 
   updateNote(note: Note) {
     this.apiService.saveNote(note).subscribe(
-      res=>{
+      res => {
         this
       }
     );
   }
 
   selectedAllNotes() {
-    this.selectedNotebook=null;
+    this.selectedNotebook = null;
     this.getAllNotes();
   }
 }

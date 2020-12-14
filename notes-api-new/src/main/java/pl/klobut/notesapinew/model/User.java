@@ -1,5 +1,7 @@
 package pl.klobut.notesapinew.model;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

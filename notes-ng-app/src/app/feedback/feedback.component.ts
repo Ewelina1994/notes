@@ -9,9 +9,9 @@ import {ApiService} from "../shared/api.service";
 })
 export class FeedbackComponent implements OnInit {
   model: FeedbackViewModel = {
-    name:'',
-    email:'',
-    feedback:''
+    name: '',
+    email: '',
+    feedback: ''
   };
 
   constructor(private apiService: ApiService) {
@@ -19,6 +19,7 @@ export class FeedbackComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   sendFeedback(): void {
     this.apiService.postFeedback(this.model).subscribe(
       res => {

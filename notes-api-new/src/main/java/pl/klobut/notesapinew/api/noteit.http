@@ -19,9 +19,11 @@ Content-Type: application/json
   "name": "Personal",
   "color": "#000000"
 }
+
 ###
 
 DELETE {{host-url}}/notebooks/3f6f9f6c-c3c2-40ba-a741-68615c6c8247
+
 ###
 
 
@@ -44,6 +46,7 @@ Content-Type: application/json
   "text": "Another Note Description",
   "notebookId": "1c560773-e9f2-4190-bae5-0b4d9a349ba3"
 }
+
 ###
 
 DELETE {{host-url}}//notes/5d6e01a8-ae61-4303-8385-28c0621cfaaf
@@ -61,4 +64,5 @@ Content-Type: application/json
   "email": "ewelinakobut@.com.pl",
   "feedback": "Your app is so cool"
 }
+
 ###

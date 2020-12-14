@@ -19,15 +19,15 @@ public class NotebookMenager {
         this.notebookRepository = notebookRepository;
     }
 
-    public Notebook findById(Long id){
+    public Notebook findById(Long id) {
         return notebookRepository.getOne(id);
     }
 
-    public Iterable<Notebook> findAll(){
+    public Iterable<Notebook> findAll() {
         return notebookRepository.findAll();
     }
 
-    public Notebook save(Notebook notebook){
+    public Notebook save(Notebook notebook) {
         return notebookRepository.save(notebook);
     }
 

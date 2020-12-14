@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/notes.iml" filepath="$PROJECT_DIR$/notes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notes-api-new/notes-api-new.iml" filepath="$PROJECT_DIR$/notes-api-new/notes-api-new.iml" />
     </modules>
   </component>
 </project>

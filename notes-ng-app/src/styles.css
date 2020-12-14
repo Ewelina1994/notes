@@ -3,17 +3,17 @@
 @import "~font-awesome/css/font-awesome.css";
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-.list-group-item{
+.list-group-item {
   cursor: pointer;
 }
 
-.input-label{
+.input-label {
   background: rgba(0, 0, 0, 0);
   border: none;
   cursor: pointer;
 }
 
-.input-label-lg{
+.input-label-lg {
   background: rgba(0, 0, 0, 0);
   border: none;
   cursor: pointer;

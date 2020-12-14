@@ -13,18 +13,16 @@ import javax.xml.bind.ValidationException;
 public class FeedbackController {
     private FeedbackSender feedbackSender;
 
-    public FeedbackController(FeedbackSender feedbackSender)
-    {
+    public FeedbackController(FeedbackSender feedbackSender) {
         this.feedbackSender = feedbackSender;
     }
 
     @PostMapping
     public boolean sendFeedback(@RequestBody FeedbackViewModel feedbackViewModel,
-                             BindingResult bindingResult) throws ValidationException {
-        if(bindingResult.hasErrors()){
+                                BindingResult bindingResult) throws ValidationException {
+        if (bindingResult.hasErrors()) {
             throw new ValidationException("Feedback has errors; Can not send feedback;");
-        }
-        else{
+        } else {
             this.feedbackSender.sendFeedback(
                     feedbackViewModel.getEmail(),
                     feedbackViewModel.getName(),

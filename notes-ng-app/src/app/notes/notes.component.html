@@ -7,7 +7,7 @@
              class="form-control"
              style="width: 100%;"
              placeholder="Search notes..."
-      [(ngModel)]="serchText">
+             [(ngModel)]="serchText">
     </div>
     <div class="col-md-4">
       <button type="button" (click)="open(content)"
@@ -22,7 +22,7 @@
     </div>
 
   </div>
-<!-----------------------------------  okno modalne ------------------------------------------------------------------->
+  <!-----------------------------------  okno modalne ------------------------------------------------------------------->
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Add new notebook</h4>
@@ -41,10 +41,12 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button id="saveNotebook" type="button" class="btn btn-outline-dark" (click)="modal.close('Save click') || addNotebok()">Save</button>
+      <button id="saveNotebook" type="button" class="btn btn-outline-dark"
+              (click)="modal.close('Save click') || addNotebok()">Save
+      </button>
     </div>
   </ng-template>
-<!--  --------------------------------------------------------------------------------------------------------------------->
+  <!--  --------------------------------------------------------------------------------------------------------------------->
   <!-----------------------------------  okno modalne NEW NOTE ------------------------------------------------------------------->
   <ng-template #content2 let-modal>
     <div class="modal-header">
@@ -68,7 +70,9 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click') || addNote(selectedNotebook)">Save</button>
+      <button type="button" class="btn btn-outline-dark"
+              (click)="modal.close('Save click') || addNote(selectedNotebook)">Save
+      </button>
     </div>
   </ng-template>
   <!--  --------------------------------------------------------------------------------------------------------------------->
@@ -82,9 +86,11 @@
           <i class="fa fa-book"></i>&nbsp;All
         </a>
         <!-- Notebook List -->
-        <a *ngFor="let notebook of notebooks" (click)="selectNotebook(notebook)" class="list-group-item list-group-item-action">
+        <a *ngFor="let notebook of notebooks" (click)="selectNotebook(notebook)"
+           class="list-group-item list-group-item-action">
           <i class="fa fa-book"></i>&nbsp;
-          <input [(ngModel)]="notebook.name" (change)="updateNotebook(notebook)" type="text" class="input-label" style="width: 80%"/>
+          <input [(ngModel)]="notebook.name" (change)="updateNotebook(notebook)" type="text" class="input-label"
+                 style="width: 80%"/>
           <a (click)="deleteNotebook(notebook)" class="pull-right text-danger">
             <i class="fa fa-trash-o"></i>
           </a>
@@ -103,7 +109,8 @@
         </div>
       </div>
       <div class="row">
-        <app-note *ngFor="let n of notes | noteTextFilter:serchText" [note]="n" (noteDelete)="deleteNote($event)" (noteUpdate)="updateNote($event)"></app-note>
+        <app-note *ngFor="let n of notes | noteTextFilter:serchText" [note]="n" (noteDelete)="deleteNote($event)"
+                  (noteUpdate)="updateNote($event)"></app-note>
       </div>
     </div>
   </div>

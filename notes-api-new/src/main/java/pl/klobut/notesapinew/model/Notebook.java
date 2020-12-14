@@ -52,6 +52,6 @@ public class Notebook {
 
     @Override
     public String toString() {
-        return name+" notes: "+notes.size();
+        return name + " notes: " + notes.size();
     }
 }

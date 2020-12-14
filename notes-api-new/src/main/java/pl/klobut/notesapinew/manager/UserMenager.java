@@ -14,15 +14,15 @@ public class UserMenager {
         this.userRepository = userRepository;
     }
 
-    public User findById(Long id){
+    public User findById(Long id) {
         return userRepository.getOne(id);
     }
 
-    public User save(User user){
+    public User save(User user) {
         return userRepository.save(user);
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 }

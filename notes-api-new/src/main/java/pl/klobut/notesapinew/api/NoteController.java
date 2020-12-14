@@ -1,4 +1,5 @@
 package pl.klobut.notesapinew.api;
+
 import pl.klobut.notesapinew.Mapper;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,17 +29,18 @@ public class NoteController {
     public NoteController(NoteMenager noteMenager, NotebookMenager notebookMenager, Mapper mapper) {
         this.noteMenager = noteMenager;
         this.notebookMenager = notebookMenager;
-        this.mapper=mapper;
+        this.mapper = mapper;
     }
 
     @GetMapping("/hej")
     public String hej() {
         return "hej";
     }
+
     @GetMapping("/all")
     public Iterable<Note> getAll() {
-        for (Note n: noteMenager.findAll()
-             ) {
+        for (Note n : noteMenager.findAll()
+        ) {
             System.out.println(n.getLastModifiedOn());
         }
         return noteMenager.findAll();
@@ -46,7 +48,7 @@ public class NoteController {
 
     @GetMapping("/byId/{id}")
     public Note getById(@PathVariable Long id) {
-        Note note= this.noteMenager.findById(id);
+        Note note = this.noteMenager.findById(id);
 
         if (note == null) {
             throw new EntityNotFoundException();
@@ -61,8 +63,8 @@ public class NoteController {
         List<Note> notes = new ArrayList<>();
 
         Notebook notebook = (Notebook) this.notebookMenager.findById(notebookId);
-        if (notebook!=null) {
-             notes = (List<Note>) this.noteMenager.findAllByNotebook(notebook);
+        if (notebook != null) {
+            notes = (List<Note>) this.noteMenager.findAllByNotebook(notebook);
         }
         // map to note view model
 
@@ -75,7 +77,7 @@ public class NoteController {
             throw new ValidationException("Blad dodania note");
         }
 
-        if(noteCreateViewModel.getNotebookId()!=null){
+        if (noteCreateViewModel.getNotebookId() != null) {
             // save note instance to db
             this.noteMenager.save(noteCreateViewModel);
         }

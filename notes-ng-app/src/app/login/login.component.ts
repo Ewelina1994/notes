@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../shared/api.service";
 import {User} from "../notes/model/user";
 
@@ -9,12 +9,14 @@ import {User} from "../notes/model/user";
 })
 export class LoginComponent implements OnInit {
 
-   user: User={
+  user: User = {
     id: null,
     name: null,
     password: null
   };
-  constructor(private apiService: ApiService) { }
+
+  constructor(private apiService: ApiService) {
+  }
 
   ngOnInit(): void {
   }
@@ -22,10 +24,10 @@ export class LoginComponent implements OnInit {
   login() {
     console.log(this.user.name, this.user.password);
     this.apiService.login(this.user).subscribe(
-      res=>{
+      res => {
 
       },
-      err=>{
+      err => {
         alert("Nie udało się przesłac dane do zalogowania");
       }
     )
