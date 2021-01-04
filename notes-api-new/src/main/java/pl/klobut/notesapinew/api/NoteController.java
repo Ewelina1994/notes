@@ -15,12 +15,13 @@ import javax.persistence.EntityNotFoundException;
 import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/notes")
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class NoteController {
     private NoteMenager noteMenager;
     private NotebookMenager notebookMenager;
@@ -62,9 +63,9 @@ public class NoteController {
     public List<Note> byNotebook(@PathVariable Long notebookId) {
         List<Note> notes = new ArrayList<>();
 
-        Notebook notebook = (Notebook) this.notebookMenager.findById(notebookId);
+        Optional<Notebook> notebook = this.notebookMenager.findById(notebookId);
         if (notebook != null) {
-            notes = (List<Note>) this.noteMenager.findAllByNotebook(notebook);
+            notes = (List<Note>) this.noteMenager.findAllByNotebook(notebook.get());
         }
         // map to note view model
 

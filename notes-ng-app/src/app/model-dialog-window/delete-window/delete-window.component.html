@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Welcome user</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want delete the {{data.item}}?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="confirm()"
+          cdkFocusInitial>Ok</button>
+</div>

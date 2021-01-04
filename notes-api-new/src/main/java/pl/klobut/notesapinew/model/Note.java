@@ -14,7 +14,7 @@ public class Note {
     private String title;
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Notebook notebook;
 
     private Date lastModifiedOn;
@@ -58,6 +58,22 @@ public class Note {
     public Date getLastModifiedOn() {
 
         return lastModifiedOn;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setNotebook(Notebook notebook) {
+        this.notebook = notebook;
     }
 
     public void setLastModifiedOn(Date lastModifiedOn) {

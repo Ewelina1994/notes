@@ -1,14 +1,11 @@
 package pl.klobut.notesapinew.manager;
 
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.klobut.notesapinew.api.viewmodel.NotebookViewModel;
 import pl.klobut.notesapinew.db.NotebookRepository;
 import pl.klobut.notesapinew.model.Notebook;
 
-import java.util.Collections;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 public class NotebookMenager {
@@ -19,8 +16,9 @@ public class NotebookMenager {
         this.notebookRepository = notebookRepository;
     }
 
-    public Notebook findById(Long id) {
-        return notebookRepository.getOne(id);
+    public Optional<Notebook> findById(Long id) {
+
+        return notebookRepository.findById(id);
     }
 
     public Iterable<Notebook> findAll() {

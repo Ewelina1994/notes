@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ApiService} from "../shared/api.service";
+import {ApiService} from '../shared/api.service';
 
 @Component({
   selector: 'app-feedback',
@@ -14,7 +14,10 @@ export class FeedbackComponent implements OnInit {
     feedback: ''
   };
 
+  isSendMail: boolean;
+
   constructor(private apiService: ApiService) {
+    this.isSendMail = null;
   }
 
   ngOnInit(): void {
@@ -24,10 +27,11 @@ export class FeedbackComponent implements OnInit {
     this.apiService.postFeedback(this.model).subscribe(
       res => {
         location.reload();
+        this.isSendMail = true;
       },
       err => {
-        alert("An error has occurred while sending feedback");
         console.error(err);
+        this.isSendMail = false;
       }
     );
   }

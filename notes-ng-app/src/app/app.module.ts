@@ -12,10 +12,14 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NoteComponent} from './notes/note/note.component';
 import {NoteTextFilterPipe} from './shared/note-text-filter.pipe';
-import {MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatDialogConfig} from '@angular/material';
+import {MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatDialogConfig, MatCommonModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LoginComponent} from './login/login.component';
+import {AlertModule} from './_alert';
+import {MatProgressSpinnerModule} from '@angular/material/typings/esm5/progress-spinner';
+import {CommonModule} from '@angular/common';
+import {ModelDialogWindowModule} from './model-dialog-window/model-dialog-window.module';
 
 const appRoutes: Routes = [
   {
@@ -50,7 +54,7 @@ const appRoutes: Routes = [
     NotFoundComponent,
     NoteComponent,
     NoteTextFilterPipe,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -60,8 +64,16 @@ const appRoutes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(appRoutes, {enableTracing: true}),
     MatDialogModule,
-    NgbModule
-  ],
+    NgbModule,
+    AlertModule,
+    MatProgressSpinnerModule,
+    CommonModule,
+    MatButtonModule,
+    MatCommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ModelDialogWindowModule
+],
   providers: [],
   bootstrap: [AppComponent],
   exports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule]

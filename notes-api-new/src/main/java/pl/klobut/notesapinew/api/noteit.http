@@ -8,16 +8,15 @@ GET {{host-url}}/colors/all
 
 # API NOTEBOOK MANAGEMENT
 
-GET {{host-url}}//notebooks/all
+GET http://localhost:8080/api/notebooks/all
 
 ###
 
-POST {{host-url}}/notebooks
+POST http://localhost:8080/api/notebooks/notebooks
 Content-Type: application/json
 
 {
-  "name": "Personal",
-  "color": "#000000"
+  "name": "Personal"
 }
 
 ###
@@ -30,7 +29,7 @@ DELETE {{host-url}}/notebooks/3f6f9f6c-c3c2-40ba-a741-68615c6c8247
 
 # API NOTE MANAGEMENT
 
-GET {{host-url}}//notes/all
+GET http://localhost:8080/api/notes/all
 
 ###
 
@@ -38,7 +37,7 @@ GET {{host-url}}//notes/byId/b6d299ea-539a-42ed-83af-6163912aede4
 
 ###
 
-POST {{host-url}}//notes
+POST {{host-url}}/notes
 Content-Type: application/json
 
 {
@@ -56,7 +55,7 @@ DELETE {{host-url}}//notes/5d6e01a8-ae61-4303-8385-28c0621cfaaf
 
 # FEEDBACK
 
-POST {{host-url}}//feedback
+POST http://localhost:8080/api/feedback
 Content-Type: application/json
 
 {

@@ -12,7 +12,7 @@ import javax.xml.bind.ValidationException;
 
 @RestController
 @RequestMapping("/api/login")
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     private UserMenager userMenager;
 

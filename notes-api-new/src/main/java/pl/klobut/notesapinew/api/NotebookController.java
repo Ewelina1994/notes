@@ -18,7 +18,7 @@ examples found in 'noteit.http' file.
 
 @RestController
 @RequestMapping("/api/notebooks")
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class NotebookController {
     private NotebookMenager notebookMenager;
     // private Mapper mapper;

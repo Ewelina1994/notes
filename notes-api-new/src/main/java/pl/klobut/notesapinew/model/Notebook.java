@@ -14,7 +14,7 @@ public class Notebook {
     private Long id;
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "notebook", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "notebook", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Note> notes;
 
@@ -29,9 +29,14 @@ public class Notebook {
     }
 
     public Notebook(Long id, String name) {
-        this();
-        this.name = name;
+        this.id=id;
+        this.name=name;
     }
+//
+//    public Notebook(Long id, String name) {
+//        this();
+//        this.name = name;
+//    }
 
 
     public Long getId() {
@@ -44,6 +49,18 @@ public class Notebook {
 
     public List<Note> getNotes() {
         return notes;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 
     public int getNbOfNotes() {

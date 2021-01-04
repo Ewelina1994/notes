@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Notebook} from "../notes/model/notebook";
-import {FeedbackViewModel} from "../feedback/feedback.component";
-import {LocalNgModuleData} from "@angular/compiler-cli/src/ngtsc/scope";
-import {Note} from "../notes/model/note";
-import {not} from "rxjs/internal-compatibility";
-import {User} from "../notes/model/user";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Notebook} from '../notes/model/notebook';
+import {FeedbackViewModel} from '../feedback/feedback.component';
+import {LocalNgModuleData} from '@angular/compiler-cli/src/ngtsc/scope';
+import {Note} from '../notes/model/note';
+import {not} from 'rxjs/internal-compatibility';
+import {User} from '../notes/model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ import {User} from "../notes/model/user";
 export class ApiService {
 
   // private BASE_URL = window["cfgApiBaseUrl"]+"/api";
-  private BASE_URL = "http://localhost:8082/api";
+  private BASE_URL = 'http://localhost:8080/api';
   private ALL_NOTEBOOKS_URL = `${this.BASE_URL}\\notebooks\\all`;
   private SEND_FEDBACK_URL = `${this.BASE_URL}\\feedback`;
   private SAVE_UPDATE_NOTEBOOK = `${this.BASE_URL}\\notebooks`;
@@ -40,6 +40,7 @@ export class ApiService {
     return this.http.post<Notebook>(this.SAVE_UPDATE_NOTEBOOK, notebook);
   }
 
+  // tslint:disable-next-line:ban-types
   deleteNotebook(id: String): Observable<any> {
     return this.http.delete(this.DELETE_NOTEBOK_URL + id);
   }

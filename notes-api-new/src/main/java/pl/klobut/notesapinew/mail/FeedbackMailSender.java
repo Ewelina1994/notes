@@ -1,18 +1,10 @@
 package pl.klobut.notesapinew.mail;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
-import javax.mail.BodyPart;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 
 @Component
@@ -25,12 +17,15 @@ public class FeedbackMailSender implements FeedbackSender {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.debug", "true");
         mailSender.setJavaMailProperties(properties);
         mailSender.setHost(environment.getProperty("spring.mail.host"));
-//        mailSender.setPort(Integer.parseInt(environment.getProperty("spring.mail.port")));
-        mailSender.setPort(587);
+        mailSender.setPort(Integer.parseInt(environment.getProperty("spring.mail.port")));
+       // mailSender.setPort(587);
         mailSender.setUsername(environment.getProperty("spring.mail.username"));
         mailSender.setPassword(environment.getProperty("spring.mail.password"));
+
+
     }
 
     @Override

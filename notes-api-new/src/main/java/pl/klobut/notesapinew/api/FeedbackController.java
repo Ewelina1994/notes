@@ -9,7 +9,7 @@ import javax.xml.bind.ValidationException;
 
 @RestController
 @RequestMapping("/api/feedback")
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FeedbackController {
     private FeedbackSender feedbackSender;
 

@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-4">
       <button type="button" (click)="open(content)"
-              class="btn btn-info pull-right"
+              class="btn btn-info pName noteull-right"
               style="margin-left:12px;"><i class="fa fa-plus"></i> New notebook
       </button>
       <button type="button" (click)="open(content2)"
@@ -31,11 +31,11 @@
       </button>
     </div>
     <div class="modal-body">
-      <form (keyup.enter)="addNotebok()">
+      <form (keyup.enter)="addNotebok() || modal.close('Save click')">
         <div class="form-group">
-          <label for="name">Name note</label>
+          <label for="name">Name notebook</label>
           <div class="input-group">
-            <input id="name" [(ngModel)]="newNotebook" name="name" class="form-control">
+            <input id="name" autofocus [(ngModel)]="newNotebook" name="name" class="form-control">
           </div>
         </div>
       </form>
@@ -60,11 +60,11 @@
         <div class="form-group">
           <label for="title">Title note</label>
           <div class="input-group">
-            <input id="title" [(ngModel)]="this.newNote2.title" name="name" class="form-control">
+            <input id="title" [(ngModel)]="this.newNote2.title" name="title" class="form-control">
           </div>
           <label for="text">Text note</label>
           <div class="input-group">
-            <input id="text" [(ngModel)]="this.newNote2.text" name="name" class="form-control">
+            <input id="text" [(ngModel)]="this.newNote2.text" name="title" class="form-control">
           </div>
         </div>
       </form>
@@ -100,18 +100,23 @@
 
     <!-- Notes Panel -->
     <div class="col-md-9">
-      <div class="row">
-        <div class="col-md-12">
+        <div class="text-center">
           <!-- Message if there are no notes -->
-          <p *ngIf="selectedNotebook!=null">{{selectedNotebook.name}}</p>
-          <p *ngIf="selectedNotebook==null">All notes</p>
-          <p *ngIf="this.notes.length===0">There are no notes to display in this notebook :(</p>
+          <p *ngIf="selectedNotebook!=null && allDataFetched"
+             [ngStyle]="{'font-weight': 'bold'}">
+            {{selectedNotebook.name}}</p>
+          <p *ngIf="selectedNotebook===null && allDataFetched"
+              [ngStyle]="{'font-weight': 'bold'}">
+              All notes</p>
+          <p *ngIf="notes.length===0 && allDataFetched">There are no notes to display in this notebook :(</p>
+          <mat-spinner *ngIf="!allDataFetched"></mat-spinner>
         </div>
-      </div>
       <div class="row">
         <app-note *ngFor="let n of notes | noteTextFilter:serchText" [note]="n" (noteDelete)="deleteNote($event)"
                   (noteUpdate)="updateNote($event)"></app-note>
       </div>
     </div>
   </div>
+<!--  alerty-->
+  <alert></alert>
 </div>

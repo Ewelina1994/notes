@@ -39,10 +39,11 @@ public class NoteMenager {
     }
 
     public void deleteById(Long id) {
+
         noteRepository.deleteById(id);
     }
 
     public Iterable<Note> findAllByNotebook(Notebook notebook) {
-        return noteRepository.findAllByNotebook(notebook);
+        return noteRepository.findAllByNotebook(notebook.getId());
     }
 }
