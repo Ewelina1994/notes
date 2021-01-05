@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Note} from "../model/note";
+import {Note} from '../model/note';
 
 @Component({
   selector: 'app-note',
@@ -19,7 +19,6 @@ export class NoteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //console.log(this.note.lastModifieddOn);
   }
 
   updateNote() {

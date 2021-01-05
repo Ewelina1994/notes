@@ -10,13 +10,13 @@
              [(ngModel)]="serchText">
     </div>
     <div class="col-md-4">
-      <button type="button" (click)="open(content)"
+      <button type="button" (click)="openModal()"
               class="btn btn-info pName noteull-right"
               style="margin-left:12px;"><i class="fa fa-plus"></i> New notebook
       </button>
-      <button type="button" (click)="open(content2)"
+      <button type="button"
               [disabled]="selectedNotebook==null"
-              class="btn btn-warning pull-right"
+              class="btn btn-warning"
               style="margin-left:12px;"><i class="fa fa-plus"></i> New note
       </button>
     </div>
@@ -31,7 +31,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <form (keyup.enter)="addNotebok() || modal.close('Save click')">
+      <form (keyup.enter)="addNotebok()">
         <div class="form-group">
           <label for="name">Name notebook</label>
           <div class="input-group">

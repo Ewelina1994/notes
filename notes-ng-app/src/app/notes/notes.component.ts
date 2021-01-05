@@ -2,10 +2,11 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Notebook} from './model/notebook';
 import {ApiService} from '../shared/api.service';
 import {Note} from './model/note';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AlertService} from '../_alert';
-import {MatDialog} from '@angular/material';
 import {DeleteWindowComponent} from '../model-dialog-window/delete-window/delete-window.component';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {NewNotebookModalComponent} from '../model-dialog-window/new-notebook-modal/new-notebook-modal.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-notes',
@@ -14,7 +15,6 @@ import {DeleteWindowComponent} from '../model-dialog-window/delete-window/delete
 })
 export class NotesComponent implements OnInit {
 
-   closeResult = '';
    notebooks: Notebook[] = [];
    notes: Note[];
    selectedNotebook: Notebook;
@@ -32,8 +32,9 @@ export class NotesComponent implements OnInit {
     autoClose: true,
     keepAfterRouteChange: false
   };
+  modalRef: BsModalRef;
 
-  constructor(private apiService: ApiService, public modalService: NgbModal, protected alertService: AlertService, public dialog: MatDialog) {
+  constructor(private apiService: ApiService, protected alertService: AlertService, protected dialog: MatDialog, private modalService: BsModalService) {
     this.notes = [];
   }
 
@@ -65,34 +66,7 @@ export class NotesComponent implements OnInit {
     );
   }
 
-  // input.addEventListener("keyup", function (event) {
-  //   if(event.keyCode === 13){
-  //     event.preventDefault();
-  //     document.getElementById("saveNotebook").click();
-  //   }
-  // };
-
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
   addNotebok() {
-    console.log(this.newNotebook);
-    // @ts-ignore
     const newN: Notebook = {
       name: this.newNotebook,
       id: null,
@@ -161,12 +135,10 @@ export class NotesComponent implements OnInit {
 
   addNote(notebook: Notebook) {
     this.newNote2.notebook = notebook;
-    // console.log(this.newNote2);
     this.apiService.saveNote(this.newNote2).subscribe(
       res => {
         this.newNote2.lastModifieddOn = res.lastModifieddOn;
         this.notes.push(this.newNote2);
-        console.log(this.newNote2);
         this.alertService.success('Sucess added note', this.options);
       },
       err => {
@@ -174,7 +146,6 @@ export class NotesComponent implements OnInit {
         this.alertService.error('Failed added note', this.options);
       }
     );
-    console.log(this.newNote2.lastModifieddOn);
   }
 
   selectNotebook(notebook: Notebook) {
@@ -182,7 +153,6 @@ export class NotesComponent implements OnInit {
     this.apiService.getNotesByNootebok(notebook).subscribe(
       res => {
         this.notes = res;
-        console.log(this.notes);
       },
       err => {
         this.alertService.error('Error to read notes of notebook', this.options);
@@ -210,8 +180,10 @@ export class NotesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       areYouSure = result;
     });
+  }
+  openModal() {
+    this.modalRef = this.modalService.show(NewNotebookModalComponent);
   }
 }

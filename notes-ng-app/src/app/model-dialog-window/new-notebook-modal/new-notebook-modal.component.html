@@ -1,0 +1,24 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title">Add new notebook</h4>
+    <button type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (keyup.enter)="addNotebok()">
+      <div class="form-group">
+        <label for="name">Name notebook</label>
+        <div class="input-group">
+          <input id="name" autofocus [(ngModel)]="nameNotebook" name="name" class="form-control">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark"
+            (click)="addNotebok()">Save
+    </button>
+  </div>
+</div>
+

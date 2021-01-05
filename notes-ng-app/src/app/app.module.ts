@@ -6,20 +6,26 @@ import {AppComponent} from './app.component';
 import {NavigationComponent} from './navigation/navigation.component';
 import {FeedbackComponent} from './feedback/feedback.component';
 import {NotesComponent} from './notes/notes.component';
-import {NotFoundComponent} from './not-found/not-found.component';
 import {Routes, RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NoteComponent} from './notes/note/note.component';
 import {NoteTextFilterPipe} from './shared/note-text-filter.pipe';
-import {MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatDialogConfig, MatCommonModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LoginComponent} from './login/login.component';
 import {AlertModule} from './_alert';
-import {MatProgressSpinnerModule} from '@angular/material/typings/esm5/progress-spinner';
 import {CommonModule} from '@angular/common';
-import {ModelDialogWindowModule} from './model-dialog-window/model-dialog-window.module';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {NewNotebookModalComponent} from './model-dialog-window/new-notebook-modal/new-notebook-modal.component';
+import {DeleteWindowComponent} from './model-dialog-window/delete-window/delete-window.component';
+// @ts-ignore
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatCommonModule} from '@angular/material/core';
 
 const appRoutes: Routes = [
   {
@@ -38,23 +44,21 @@ const appRoutes: Routes = [
     path: '',
     component: NotesComponent,
     pathMatch: 'full'
-  },
-  {
-    path: '**',
-    component: NotFoundComponent
   }
 ];
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     FeedbackComponent,
     NotesComponent,
-    NotFoundComponent,
     NoteComponent,
     NoteTextFilterPipe,
-    LoginComponent
+    LoginComponent,
+    DeleteWindowComponent,
+    NewNotebookModalComponent
   ],
   imports: [
     BrowserModule,
@@ -72,8 +76,9 @@ const appRoutes: Routes = [
     MatCommonModule,
     MatFormFieldModule,
     MatInputModule,
-    ModelDialogWindowModule
+    ModalModule.forRoot()
 ],
+  entryComponents: [NewNotebookModalComponent, DeleteWindowComponent],
   providers: [],
   bootstrap: [AppComponent],
   exports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule]
