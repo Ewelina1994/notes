@@ -3,10 +3,9 @@ import {Notebook} from './model/notebook';
 import {ApiService} from '../shared/api.service';
 import {Note} from './model/note';
 import {AlertService} from '../_alert';
-import {DeleteWindowComponent} from '../model-dialog-window/delete-window/delete-window.component';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {NewNotebookModalComponent} from '../model-dialog-window/new-notebook-modal/new-notebook-modal.component';
-import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDeleteService} from '../model-dialog-window/confirm-delete-modal/confirm-delete.service';
 
 @Component({
   selector: 'app-notes',
@@ -27,14 +26,13 @@ export class NotesComponent implements OnInit {
   };
    newNotebook: string;
    serchText: string;
-  allDataFetched: boolean = false;
+  allDataFetched = false;
   options = {
     autoClose: true,
     keepAfterRouteChange: false
   };
-  modalRef: BsModalRef;
 
-  constructor(private apiService: ApiService, protected alertService: AlertService, protected dialog: MatDialog, private modalService: BsModalService) {
+  constructor(private apiService: ApiService, protected alertService: AlertService, private confirmModal: ConfirmDeleteService, private modalService: BsModalService) {
     this.notes = [];
   }
 
@@ -99,25 +97,25 @@ export class NotesComponent implements OnInit {
   }
 
   deleteNotebook(notebook: Notebook) {
-    var areYouSure: boolean = false;
-    this.openDialogDelete(notebook, areYouSure);
-    if (confirm('Are you shure you want to delete this notebook?')) {
-      this.apiService.deleteNotebook(notebook.id).subscribe(
-        res => {
-          const indexOfNotebook = this.notebooks.indexOf(notebook);
-          this.notebooks.splice(indexOfNotebook, 1);
-          this.alertService.success('Notebook was successfully deleted', this.options);
-        },
-        error => {
-          this.alertService.error('Error while delete notebook', this.options);
-        }
-      );
-    }
+    // tslint:disable-next-line:prefer-const
+    let confirmed: boolean;
+    this.confirmModal.confirm('Please confirm', 'Do you really want to remove ' + notebook.name + '?')
+      .then((confirm) => {
+        this.apiService.deleteNotebook(notebook.id).subscribe(
+          res => {
+            const indexOfNotebook = this.notebooks.indexOf(notebook);
+            this.notebooks.splice(indexOfNotebook, 1);
+            this.alertService.success('Notebook was successfully deleted', this.options);
+          },
+          error => {
+            this.alertService.error('Error while delete notebook', this.options);
+          }
+        );
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
   deleteNote(note: Note) {
-    var areYouSure: boolean = false;
-    this.openDialogDelete(note, areYouSure);
     if (confirm('Are you shure you want to delete this note?')) {
       this.apiService.deleteNote('1').subscribe(
         res => {
@@ -163,7 +161,6 @@ export class NotesComponent implements OnInit {
   updateNote(note: Note) {
     this.apiService.saveNote(note).subscribe(
       res => {
-        this;
       }
     );
   }
@@ -173,17 +170,11 @@ export class NotesComponent implements OnInit {
     this.getAllNotes();
   }
 
-  openDialogDelete(item: any, areYouSure: boolean): void {
-    const dialogRef = this.dialog.open(DeleteWindowComponent, {
-      width: '250px',
-      data: {item, areYouSure}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      areYouSure = result;
-    });
-  }
   openModal() {
-    this.modalRef = this.modalService.show(NewNotebookModalComponent);
+    const modalRef = this.modalService.show(NewNotebookModalComponent);
+   // modalRef.content.closeBtnName = 'Close';
+    modalRef.content.nameNotebook.subscribe((value) => {
+      console.log(value); // here you will get the value
+    });
   }
 }

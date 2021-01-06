@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 
 @Component({
@@ -9,13 +9,16 @@ import {BsModalRef} from 'ngx-bootstrap/modal';
 export class NewNotebookModalComponent implements OnInit {
 
   @Output()
-  public nameNotebook: string;
-  constructor() {
+  nameNotebook = new EventEmitter<string>();
+  constructor(public bsModalRef: BsModalRef) {
   }
 
   ngOnInit(): void {
   }
 
   addNotebok() {
+    // @ts-ignore
+    this.nameNotebook.emit(this.nameNotebook);
+    this.bsModalRef.hide();
   }
 }

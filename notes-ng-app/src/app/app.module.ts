@@ -18,14 +18,15 @@ import {AlertModule} from './_alert';
 import {CommonModule} from '@angular/common';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {NewNotebookModalComponent} from './model-dialog-window/new-notebook-modal/new-notebook-modal.component';
-import {DeleteWindowComponent} from './model-dialog-window/delete-window/delete-window.component';
 // @ts-ignore
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCommonModule} from '@angular/material/core';
+import { ConfirmDeleteComponent } from './model-dialog-window/confirm-delete-modal/confirm-delete/confirm-delete.component';
+// @ts-ignore
+import { MatDialogModule } from '@angular/material/dialog';
 
 const appRoutes: Routes = [
   {
@@ -57,8 +58,8 @@ const appRoutes: Routes = [
     NoteComponent,
     NoteTextFilterPipe,
     LoginComponent,
-    DeleteWindowComponent,
-    NewNotebookModalComponent
+    NewNotebookModalComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +79,7 @@ const appRoutes: Routes = [
     MatInputModule,
     ModalModule.forRoot()
 ],
-  entryComponents: [NewNotebookModalComponent, DeleteWindowComponent],
+  entryComponents: [NewNotebookModalComponent, ConfirmDeleteComponent],
   providers: [],
   bootstrap: [AppComponent],
   exports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule]

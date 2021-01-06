@@ -1,5 +1,7 @@
 package pl.klobut.notesapinew.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
