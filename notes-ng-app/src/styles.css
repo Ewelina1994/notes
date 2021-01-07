@@ -24,3 +24,8 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+app-control-messages-form div{
+  color: #E82C0C;
+  margin: 6px 0;
+}

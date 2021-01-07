@@ -10,12 +10,13 @@
              [(ngModel)]="serchText">
     </div>
     <div class="col-md-4">
-      <button type="button" (click)="openModal()"
+      <button type="button" (click)="openModalNewNotebook()"
               class="btn btn-info pName noteull-right"
               style="margin-left:12px;"><i class="fa fa-plus"></i> New notebook
       </button>
       <button type="button"
               [disabled]="selectedNotebook==null"
+              (click)="openModalNewNote(selectedNotebook)"
               class="btn btn-warning"
               style="margin-left:12px;"><i class="fa fa-plus"></i> New note
       </button>
@@ -31,7 +32,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <form (keyup.enter)="addNotebok()">
+      <form>
         <div class="form-group">
           <label for="name">Name notebook</label>
           <div class="input-group">
@@ -42,7 +43,7 @@
     </div>
     <div class="modal-footer">
       <button id="saveNotebook" type="button" class="btn btn-outline-dark"
-              (click)="modal.close('Save click') || addNotebok()">Save
+              (click)="modal.close('Save click')">Save
       </button>
     </div>
   </ng-template>
@@ -56,7 +57,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <form (ngSubmit)="addNote(selectedNotebook)" (keyup.enter)="addNote(selectedNotebook)">
+      <form>
         <div class="form-group">
           <label for="title">Title note</label>
           <div class="input-group">
@@ -70,8 +71,7 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark"
-              (click)="modal.close('Save click') || addNote(selectedNotebook)">Save
+      <button type="button" class="btn btn-outline-dark">Save
       </button>
     </div>
   </ng-template>

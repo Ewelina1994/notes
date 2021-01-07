@@ -7,7 +7,7 @@ import {NavigationComponent} from './navigation/navigation.component';
 import {FeedbackComponent} from './feedback/feedback.component';
 import {NotesComponent} from './notes/notes.component';
 import {Routes, RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NoteComponent} from './notes/note/note.component';
 import {NoteTextFilterPipe} from './shared/note-text-filter.pipe';
@@ -27,6 +27,7 @@ import {MatCommonModule} from '@angular/material/core';
 import { ConfirmDeleteComponent } from './model-dialog-window/confirm-delete-modal/confirm-delete/confirm-delete.component';
 // @ts-ignore
 import { MatDialogModule } from '@angular/material/dialog';
+import { NewNoteModalComponent } from './model-dialog-window/new-note-modal/new-note-modal.component';
 
 const appRoutes: Routes = [
   {
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
     NoteTextFilterPipe,
     LoginComponent,
     NewNotebookModalComponent,
-    ConfirmDeleteComponent
+    ConfirmDeleteComponent,
+    NewNoteModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,9 +79,10 @@ const appRoutes: Routes = [
     MatCommonModule,
     MatFormFieldModule,
     MatInputModule,
-    ModalModule.forRoot()
-],
-  entryComponents: [NewNotebookModalComponent, ConfirmDeleteComponent],
+    ModalModule.forRoot(),
+    ReactiveFormsModule
+  ],
+  entryComponents: [NewNotebookModalComponent, ConfirmDeleteComponent, NewNoteModalComponent],
   providers: [],
   bootstrap: [AppComponent],
   exports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule]

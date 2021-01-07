@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title-note">Add new note</h4>
+  <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="itemsNoteForm" (ngSubmit)="saveToList(itemsNoteForm)">
+    <div class="form-group">
+      <label for="title">Title note</label>
+      <div class="input-group">
+        <input autofocus formControlName="title" id="title" class="form-control">
+      </div>
+      <app-control-messages-form [control]="itemsNoteForm.get('title')"></app-control-messages-form>
+      <label for="text">Text note</label>
+      <div class="input-group">
+        <input formControlName="text" id="text" class="form-control">
+      </div>
+      <app-control-messages-form [control]="itemsNoteForm.get('text')"></app-control-messages-form>
+    </div>
+<div class="modal-footer">
+  <button type="ngSubmit" [disabled]="!itemsNoteForm.valid" class="btn btn-success">Save
+  </button>
+</div>
+</form>
+</div>
