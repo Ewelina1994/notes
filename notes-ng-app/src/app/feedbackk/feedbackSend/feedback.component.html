@@ -1,0 +1,46 @@
+<app-navigation></app-navigation>
+<div class="card text-center">
+  <div class="card-header">
+<ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="/" role="tab" aria-controls="home" aria-selected="true">Send message</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" routerLink="/feedback/all" role="tab" aria-controls="profile" aria-selected="false">All sent messages</a>
+  </li>
+</ul>
+  </div>
+<div class="card-body">
+<!--  <div class="row">-->
+<!--    <div class="offset-3"></div>-->
+<!--    <div class="col-md-6">-->
+      <form [formGroup]="formFeedback" class="feedback-form form-group" (ngSubmit)="formFeedback.valid && sendFeedback(formFeedback)">
+        <div class="form-group">
+          <label for="name">First Name</label>
+          <input type="text" id="name" class="form-control" name="name" placeholder="Your name" required
+                 [(ngModel)]="modelNewFeedback.name"
+                 formControlName="name"/>
+          </div>
+        <app-control-messages-form [control]="formFeedback.get('name')"></app-control-messages-form>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" name="email" placeholder="Your email"
+                 [(ngModel)]="modelNewFeedback.email" required email formControlName="email"/>
+        </div>
+        <app-control-messages-form [control]="formFeedback.get('email')"></app-control-messages-form>
+        <div class="form-group">
+          <label for="feedback">Feedback</label>
+          <textarea id="feedback" class="form-control" name="feedback" placeholder="Your feedback" rows="10"
+                    required minlength="10" [(ngModel)]="modelNewFeedback.feedback" formControlName="feedback"></textarea>
+        </div>
+        <app-control-messages-form [control]="formFeedback.get('feedback')"></app-control-messages-form>
+        <button type="ngSubmit" class="btn btn-info pull-right" [disabled]="!formFeedback.valid">
+          <i class="fa fa-envelope-o"></i>
+          <span> Send Feedback</span>
+        </button>
+      </form>
+      <alert></alert>
+    </div>
+<!--    <div class="offset-3"></div>-->
+  </div>
+

@@ -17,7 +17,7 @@
   background: rgba(0, 0, 0, 0);
   border: none;
   cursor: pointer;
-  font-size: large;
+  /*font-size: large;*/
   font-weight: bold;
 }
 
@@ -26,6 +26,13 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 app-control-messages-form div{
-  color: #E82C0C;
   margin: 6px 0;
+}
+
+.card-color{
+  background: #70bb67;
+  border-radius: 10px;
+}
+.card-color:hover{
+  background: #88ca80;
 }

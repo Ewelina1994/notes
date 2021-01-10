@@ -16,9 +16,9 @@ import {NewNoteModalComponent} from '../model-dialog-window/new-note-modal/new-n
 export class NotesComponent implements OnInit {
 
    notebooks: Notebook[] = [];
-   notes: Note[];
+   notes: Note[] = [];
    selectedNotebook: Notebook;
-   newNote2: Note = {
+  newNote2: Note = {
     id: null,
     lastModifieddOn: null,
     notebook: null,
@@ -34,7 +34,6 @@ export class NotesComponent implements OnInit {
   };
 
   constructor(private apiService: ApiService, protected alertService: AlertService, private confirmModal: ConfirmDeleteService, private modalService: BsModalService) {
-    this.notes = [];
   }
 
   ngOnInit(): void {
@@ -57,6 +56,7 @@ export class NotesComponent implements OnInit {
     this.apiService.getAllNotes().subscribe(
       res => {
         this.notes = res;
+        console.log(this.notes);
         this.allDataFetched = true;
       },
       err => {
@@ -119,10 +119,11 @@ export class NotesComponent implements OnInit {
     this.confirmModal.confirm('Please confirm', 'Do you really want to remove ' + note.title + '?')
       .then((confirm) => {
         if (confirm) {
-          this.apiService.deleteNote('1').subscribe(
+          this.apiService.deleteNote(note.id).subscribe(
             res => {
               const indexOfNote = this.notes.indexOf(note);
               this.notes.splice(indexOfNote, 1);
+              console.log(this.notes);
               this.alertService.success('Note was successfully deleted', this.options);
             },
             err => {
@@ -135,11 +136,13 @@ export class NotesComponent implements OnInit {
   }
 
   addNote() {
-    console.log(this.newNote2);
     this.apiService.saveNote(this.newNote2).subscribe(
       res => {
-        this.newNote2.lastModifieddOn = res.lastModifieddOn;
+        this.newNote2.id = res.id;
+        this.newNote2.lastModifieddOn = new Date();
         this.notes.push(this.newNote2);
+        console.log(this.newNote2);
+        console.log(res.lastModifieddOn);
         this.alertService.success('Sucess added note', this.options);
       },
       err => {
@@ -177,7 +180,7 @@ export class NotesComponent implements OnInit {
     let nameNotebook: string;
     const modalRef = this.modalService.show(NewNotebookModalComponent);
     modalRef.content.event.subscribe(res => {
-      if (!res.isNotNullOrUndefined){
+      if (!res.isNotNullOrUndefined) {
         nameNotebook = res.data;
         this.addNotebok(nameNotebook);
       }
@@ -189,7 +192,7 @@ export class NotesComponent implements OnInit {
     const modalRef = this.modalService.show(NewNoteModalComponent);
     modalRef.content.event.subscribe(res => {
       console.log(res);
-      if (!res.isNotNullOrUndefined){
+      if (!res.isNotNullOrUndefined) {
         this.newNote2.title = res.title;
         this.newNote2.text = res.text;
         this.addNote();

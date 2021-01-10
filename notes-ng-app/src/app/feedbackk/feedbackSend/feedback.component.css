@@ -1,0 +1,13 @@
+.invalid-input {
+  color: red;
+}
+.feedback-form {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 50%;
+  margin: auto;
+}
+
+.feedback-form textarea{
+  height: 200px;
+}

@@ -29,18 +29,18 @@ public class DbSeeder implements CommandLineRunner {
 
 
         // Save a default notebook
-        Notebook defaultNotebook = new Notebook("Default");
+        Notebook defaultNotebook = new Notebook("Monday");
         this.notebookRepository.save(defaultNotebook);
 
-        Notebook quotesNotebook = new Notebook("Quotes");
+        Notebook quotesNotebook = new Notebook("Tuesday");
         this.notebookRepository.save(quotesNotebook);
 
         // Save the welcome note
-        Note note = new Note("Hello", "Welcome to Note It", defaultNotebook);
+        Note note = new Note("Cleaning", "Clean the bathroom\n", defaultNotebook);
         this.noteRepository.save(note);
 
         // Save a quote note
-        Note quoteNote = new Note("Latin Quote", "Carpe Diem", quotesNotebook);
+        Note quoteNote = new Note("Dinner", "Minced meat", quotesNotebook);
         this.noteRepository.save(quoteNote);
 
         System.out.println("Initialized database");

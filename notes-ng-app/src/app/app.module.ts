@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NavigationComponent} from './navigation/navigation.component';
-import {FeedbackComponent} from './feedback/feedback.component';
+import {FeedbackComponent} from './feedbackk/feedbackSend/feedback.component';
 import {NotesComponent} from './notes/notes.component';
 import {Routes, RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -28,6 +28,7 @@ import { ConfirmDeleteComponent } from './model-dialog-window/confirm-delete-mod
 // @ts-ignore
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewNoteModalComponent } from './model-dialog-window/new-note-modal/new-note-modal.component';
+import { FeedbackAllComponent } from './feedbackk/feedback-all/feedback-all.component';
 
 const appRoutes: Routes = [
   {
@@ -37,6 +38,10 @@ const appRoutes: Routes = [
   {
     path: 'feedback',
     component: FeedbackComponent
+  },
+  {
+    path: 'feedback/all',
+    component: FeedbackAllComponent
   },
   {
     path: 'login',
@@ -62,6 +67,7 @@ const appRoutes: Routes = [
     NewNotebookModalComponent,
     ConfirmDeleteComponent,
     NewNoteModalComponent,
+    FeedbackAllComponent,
   ],
   imports: [
     BrowserModule,

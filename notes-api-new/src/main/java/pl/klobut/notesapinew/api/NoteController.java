@@ -1,5 +1,7 @@
 package pl.klobut.notesapinew.api;
 
+import javassist.NotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import pl.klobut.notesapinew.Mapper;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -86,7 +88,13 @@ public class NoteController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        this.noteMenager.deleteById(id);
+    public void delete(@PathVariable Long id) throws NotFoundException {
+        try{
+            this.noteMenager.deleteById(id);
+        }
+        catch (EmptyResultDataAccessException ex) {
+            // either do nothing to return a 204, or
+            throw new NotFoundException("No Found book id");
+        }
     }
 }

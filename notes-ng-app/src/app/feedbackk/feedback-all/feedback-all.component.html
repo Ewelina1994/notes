@@ -1,0 +1,31 @@
+<app-navigation></app-navigation>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link " href="/feedback" role="tab" aria-controls="profile" aria-selected="true">Send message</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" routerLink="/feedback/all" role="tab" aria-controls="home" aria-selected="true">All sent messages</a>
+  </li>
+</ul>
+<div class="container">
+  <table class="table table-hover">
+  <thead>
+  <tr class="table-dark">
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Email for sender</th>
+    <th scope="col">Contents</th>
+    <th scope="col">Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let feedback of feedbacks let number of numbers">
+    <th scope="row">{{feedback.id}}</th>
+    <td>{{feedback.name}}</td>
+    <td>{{feedback.email}}</td>
+    <td>{{feedback.feedback}}</td>
+    <td>{{feedback.date}}</td>
+  </tr>
+  </tbody>
+</table>
+</div>

@@ -5,5 +5,5 @@ export interface Note {
   title: String;
   text: String;
   notebook: Notebook;
-  lastModifieddOn: String;
+  lastModifieddOn: Date;
 }

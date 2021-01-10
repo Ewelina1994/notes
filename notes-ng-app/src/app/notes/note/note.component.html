@@ -1,4 +1,4 @@
-<div class="card bg-warning" style="border: 4px solid white;">
+<div class="card card-color" style="border: 4px solid white;">
   <div>
     <!--            title-->
     <input type="text"
@@ -15,5 +15,5 @@
   <textarea [(ngModel)]="note.text" (change)="updateNote()" class="input-label"
             style="width: 100%"
             rows="6"></textarea>
-  <strong class="text-info" style="font-size: small">{{note.lastModifieddOn|date: 'dd-MM-yyyy hh:mm'}}</strong>
+  <strong style="background: red" class="text-info">{{note.lastModifieddOn | date: 'yyyy-MM-dd hh:mm a'}}</strong>
 </div>

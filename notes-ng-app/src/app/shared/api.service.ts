@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Notebook} from '../notes/model/notebook';
-import {FeedbackViewModel} from '../feedback/feedback.component';
 import {LocalNgModuleData} from '@angular/compiler-cli/src/ngtsc/scope';
 import {Note} from '../notes/model/note';
 import {not} from 'rxjs/internal-compatibility';
 import {User} from '../notes/model/user';
+import {Feedback} from '../notes/model/feedback';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,8 @@ export class ApiService {
   private BASE_URL = 'http://localhost:8080/api';
   private ALL_NOTEBOOKS_URL = `${this.BASE_URL}\\notebooks\\all`;
   private SEND_FEDBACK_URL = `${this.BASE_URL}\\feedback`;
+  private SAVE_FEEDBACK = `${this.BASE_URL}\\feedback\\add`;
+  private ALL_FEEDBACKS = `${this.BASE_URL}\\feedback\\all`;
   private SAVE_UPDATE_NOTEBOOK = `${this.BASE_URL}\\notebooks`;
   private DELETE_NOTEBOK_URL = `${this.BASE_URL}\\notebooks\\`;
   private ALL_NOTES_URL = `${this.BASE_URL}\\notes\\all`;
@@ -32,8 +34,16 @@ export class ApiService {
     return this.http.get<Notebook[]>(this.ALL_NOTEBOOKS_URL);
   }
 
-  postFeedback(fedback: FeedbackViewModel): Observable<any> {
+  postFeedback(fedback: Feedback): Observable<any> {
     return this.http.post(this.SEND_FEDBACK_URL, fedback);
+  }
+
+  saveFeedback(fedback: Feedback): Observable<any> {
+    return this.http.post(this.SAVE_FEEDBACK, fedback);
+  }
+
+  getAllFeedbacks(): Observable<Feedback[]>{
+    return this.http.get<Feedback[]>(this.ALL_FEEDBACKS);
   }
 
   postNotebook(notebook: Notebook): Observable<Notebook> {
