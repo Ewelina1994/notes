@@ -2,13 +2,11 @@ package pl.klobut.notesapinew.api;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.klobut.notesapinew.api.viewmodel.FeedbackViewModel;
 import pl.klobut.notesapinew.mail.FeedbackSender;
 import pl.klobut.notesapinew.manager.FeedbackMenager;
 import pl.klobut.notesapinew.model.Feedback;
 import javax.xml.bind.ValidationException;
 import java.util.Date;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/feedback")
@@ -34,8 +32,6 @@ public class FeedbackController {
           //  feedbackMenager.saveFeedback(feedback);
             return true;
         }
-
-
     }
 
     @PostMapping("/add")

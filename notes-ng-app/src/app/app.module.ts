@@ -29,11 +29,13 @@ import { ConfirmDeleteComponent } from './model-dialog-window/confirm-delete-mod
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewNoteModalComponent } from './model-dialog-window/new-note-modal/new-note-modal.component';
 import { FeedbackAllComponent } from './feedbackk/feedback-all/feedback-all.component';
+import {MatTableModule} from '@angular/material/table';
+import { DeletedNotesComponent } from './deleted-notes/deleted-notes.component';
 
 const appRoutes: Routes = [
   {
-    path: 'notes',
-    component: NotesComponent
+    path: 'notesDelete',
+    component: DeletedNotesComponent
   },
   {
     path: 'feedback',
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
     ConfirmDeleteComponent,
     NewNoteModalComponent,
     FeedbackAllComponent,
+    DeletedNotesComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     ModalModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ],
   entryComponents: [NewNotebookModalComponent, ConfirmDeleteComponent, NewNoteModalComponent],
   providers: [],

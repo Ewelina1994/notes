@@ -1,5 +1,6 @@
 package pl.klobut.notesapinew.model;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,17 +10,18 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@DynamicUpdate
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String text;
-
     @ManyToOne
     private Notebook notebook;
 
     private Date lastModifiedOn;
+    private boolean isRemove;
 
     protected Note() {
         this.lastModifiedOn = new Date();
@@ -80,5 +82,13 @@ public class Note {
 
     public void setLastModifiedOn(Date lastModifiedOn) {
         this.lastModifiedOn = lastModifiedOn;
+    }
+
+    public boolean isRemove() {
+        return isRemove;
+    }
+
+    public void setRemove(boolean remove) {
+        isRemove = remove;
     }
 }

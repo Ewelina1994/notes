@@ -11,14 +11,12 @@
     </div>
     <div class="col-md-4">
       <button type="button" (click)="openModalNewNotebook()"
-              class="btn btn-info pName noteull-right"
-              style="margin-left:12px;"><i class="fa fa-plus"></i> New notebook
+              class="btn btn-info pName noteull-right"><i class="fa fa-plus"></i> New notebook
       </button>
       <button type="button"
               [disabled]="selectedNotebook==null"
               (click)="openModalNewNote(selectedNotebook)"
-              class="btn btn-warning"
-              style="margin-left:12px;"><i class="fa fa-plus"></i> New note
+              class="btn btn-warning"><i class="fa fa-plus"></i> New note
       </button>
     </div>
   </div>

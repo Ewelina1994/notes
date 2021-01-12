@@ -2,6 +2,7 @@ package pl.klobut.notesapinew.manager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.klobut.notesapinew.db.NoteRepository;
 import pl.klobut.notesapinew.db.NotebookRepository;
 import pl.klobut.notesapinew.model.Note;
@@ -27,9 +28,6 @@ public class NoteMenager {
         return noteRepository.getOne(id);
     }
 
-    //    public Iterable<Note> findById(Long id){
-//        return noteRepository.findAllById(Collections.singleton(id));
-//    }
     public Iterable<Note> findAll() {
         return noteRepository.findAll();
     }
@@ -45,5 +43,14 @@ public class NoteMenager {
 
     public Iterable<Note> findAllByNotebook(Notebook notebook) {
         return noteRepository.findAllByNotebook(notebook.getId());
+    }
+
+    public Iterable<Note> showRemoveNotes() {
+        return noteRepository.showRemoveNotes();
+    }
+
+    @Transactional
+    public void setRemoveNote(Long idNote) {
+        noteRepository.setRemoveNote(idNote);
     }
 }

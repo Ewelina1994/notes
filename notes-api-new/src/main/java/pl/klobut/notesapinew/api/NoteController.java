@@ -87,14 +87,19 @@ public class NoteController {
         return noteCreateViewModel;
     }
 
-    @DeleteMapping("/{id}")
+    @PutMapping("/{id}")
     public void delete(@PathVariable Long id) throws NotFoundException {
         try{
-            this.noteMenager.deleteById(id);
+            this.noteMenager.setRemoveNote(id);
         }
         catch (EmptyResultDataAccessException ex) {
             // either do nothing to return a 204, or
             throw new NotFoundException("No Found book id");
         }
+    }
+
+    @GetMapping("/deleted")
+    public Iterable<Note> showRemoveNotes() {
+        return noteMenager.showRemoveNotes();
     }
 }

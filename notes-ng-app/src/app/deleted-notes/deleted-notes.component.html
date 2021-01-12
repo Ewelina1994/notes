@@ -1,0 +1,14 @@
+<app-navigation></app-navigation>
+<div class=""container>
+  <div class="row serch">
+      <input type="text"
+             class="form-control"
+             style="width: 100%;"
+             placeholder="Search notes..."
+             [(ngModel)]="serchText">
+  </div>
+    <div class="row notes">
+      <app-note *ngFor="let n of deletedNotes | noteTextFilter:serchText" [note]="n"></app-note>
+    </div>
+  <alert></alert>
+</div>

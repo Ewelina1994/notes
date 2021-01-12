@@ -4,3 +4,8 @@ mat-spinner{
   top: 50%;
   left: 40%;
 }
+btn-info{
+}
+.btn-warning{
+  margin-left: 12px;
+}

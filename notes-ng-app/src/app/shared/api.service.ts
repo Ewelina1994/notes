@@ -23,6 +23,7 @@ export class ApiService {
   private DELETE_NOTEBOK_URL = `${this.BASE_URL}\\notebooks\\`;
   private ALL_NOTES_URL = `${this.BASE_URL}\\notes\\all`;
   private NOTES_BY_NOTEBOOK_URL = `${this.BASE_URL}\\notes\\byNotebook\\`;
+  private ALL_DELETED_NOTES = `${this.BASE_URL}\\notes\\deleted\\`;
   private SAVE_UPDATE_NOTE_URL = `${this.BASE_URL}\\notes`;
   private DELETE_NOTE_URL = `${this.BASE_URL}\\notes\\`;
   private LOGIN = `${this.BASE_URL}\\login\\check`;
@@ -63,10 +64,15 @@ export class ApiService {
     return this.http.get<Note[]>(this.NOTES_BY_NOTEBOOK_URL + notebook.id);
   }
 
+  getAllDeletedNotes(): Observable<Note[]>{
+    return this.http.get<Note[]>(this.ALL_DELETED_NOTES);
+  }
+
   saveNote(note: Note): Observable<Note> {
     return this.http.post<Note>(this.SAVE_UPDATE_NOTE_URL, note);
   }
 
+  // tslint:disable-next-line:ban-types
   deleteNote(id: String): Observable<any> {
     return this.http.delete(this.DELETE_NOTE_URL + id);
   }
