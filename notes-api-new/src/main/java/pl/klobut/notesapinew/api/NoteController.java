@@ -40,7 +40,7 @@ public class NoteController {
         return "hej";
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public Iterable<Note> getAll() {
         for (Note n : noteMenager.findAll()
         ) {

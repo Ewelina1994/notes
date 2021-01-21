@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../shared/api.service';
 import {AlertService} from '../../_alert';
-import {Feedback} from '../../notes/model/feedback';
+import {Feedback} from '../../model/feedback';
 import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({

@@ -8,7 +8,7 @@ import {FeedbackComponent} from './feedbackk/feedbackSend/feedback.component';
 import {NotesComponent} from './notes/notes.component';
 import {Routes, RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NoteComponent} from './notes/note/note.component';
 import {NoteTextFilterPipe} from './shared/note-text-filter.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -31,6 +31,8 @@ import { NewNoteModalComponent } from './model-dialog-window/new-note-modal/new-
 import { FeedbackAllComponent } from './feedbackk/feedback-all/feedback-all.component';
 import {MatTableModule} from '@angular/material/table';
 import { DeletedNotesComponent } from './deleted-notes/deleted-notes.component';
+import { LogoutComponent } from './logout/logout.component';
+import {HttpInterceptorService} from './shared/http-interceptor.service';
 
 const appRoutes: Routes = [
   {
@@ -50,8 +52,16 @@ const appRoutes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'logout',
+    component: LogoutComponent
+  },
+  {
+    path: 'note',
+    component: NotesComponent
+  },
+  {
     path: '',
-    component: NotesComponent,
+    component: LoginComponent,
     pathMatch: 'full'
   }
 ];
@@ -71,6 +81,7 @@ const appRoutes: Routes = [
     NewNoteModalComponent,
     FeedbackAllComponent,
     DeletedNotesComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +104,13 @@ const appRoutes: Routes = [
     MatTableModule
   ],
   entryComponents: [NewNotebookModalComponent, ConfirmDeleteComponent, NewNoteModalComponent],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
+    ],
   bootstrap: [AppComponent],
   exports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule]
 })

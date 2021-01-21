@@ -1,5 +1,6 @@
 package pl.klobut.notesapinew.api;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException("Bład dodania usera");
         }
-        if (user.getId() != null) {
+        if (user != null) {
             this.userMenager.save(user);
         }
         return user;
@@ -50,6 +51,11 @@ public class UserController {
     @PostMapping("/check")
     public void check(@RequestBody User user) {
         System.out.println("Imię: " + user.getName() + ", hasło: " + user.getPassword());
+    }
+
+    @GetMapping("/logout")
+    public String login(){
+       return "hejksjdks";
     }
 
 }

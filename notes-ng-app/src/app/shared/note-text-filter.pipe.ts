@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Note} from '../notes/model/note';
+import {Note} from '../model/note';
 
 @Pipe({
   name: 'noteTextFilter'
