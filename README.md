@@ -4,7 +4,11 @@ Application for saving tasks divided into different categories. We can also send
 
 Running spring boot aplication, command: mvn clean install in folder: notes-api-new
 
+This api is running in HEROKU: https://notes-api-kl.herokuapp.com/
+
 Runing angular aplication, command: npm start, in folder: notes-ng-app
+
+This application web is running in HEROKU: https://notes-app-kl.herokuapp.com/
 
 API describtion:
 This Api is security basic authenicated. 
