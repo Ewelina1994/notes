@@ -4,9 +4,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.klobut.notesapinew.api.viewmodel.NotebookViewModel;
 import pl.klobut.notesapinew.manager.NotebookMenager;
+import pl.klobut.notesapinew.model.Note;
 import pl.klobut.notesapinew.model.Notebook;
 
 import javax.xml.bind.ValidationException;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.DoubleToIntFunction;
@@ -46,5 +48,10 @@ public class NotebookController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         this.notebookMenager.deleteById(id);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Notebook> getById(@PathVariable Long id) {
+        return this.notebookMenager.findById(id);
     }
 }

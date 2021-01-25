@@ -8,9 +8,13 @@ import {map} from 'rxjs/operators';
 export class AuthService {
   // BASE_PATH: 'http://localhost:8080'
   USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser';
+  USER_NAME_SESSION_ATTRIBUTE_PASSWORD = 'authenticatedUserPass';
   public username: String;
   public password: String;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.username = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
+    this.password = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_PASSWORD);
+  }
 
   authenticationService(username: String, password: String) {
     return this.http.get(`http://localhost:8080/api/basicauth`,
@@ -28,10 +32,13 @@ export class AuthService {
 
   registerSuccessfulLogin(username, password) {
     sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username);
+    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_PASSWORD, password);
   }
 
   logout() {
     sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
+    sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_PASSWORD);
+
     this.username = null;
     this.password = null;
   }

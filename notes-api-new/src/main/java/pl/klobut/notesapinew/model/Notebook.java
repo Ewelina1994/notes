@@ -63,9 +63,6 @@ public class Notebook {
         this.notes = notes;
     }
 
-    public int getNbOfNotes() {
-        return this.notes.size();
-    }
 
     @Override
     public String toString() {
