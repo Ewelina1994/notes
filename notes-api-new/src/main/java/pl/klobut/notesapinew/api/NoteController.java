@@ -14,6 +14,7 @@ import pl.klobut.notesapinew.model.Note;
 import pl.klobut.notesapinew.model.Notebook;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +36,6 @@ public class NoteController {
         this.mapper = mapper;
     }
 
-    @GetMapping("/hej")
-    public String hej() {
-        return "hej";
-    }
-
     @GetMapping()
     public Iterable<Note> getAll() {
         for (Note n : noteMenager.findAll()
@@ -56,7 +52,6 @@ public class NoteController {
         if (note == null) {
             throw new EntityNotFoundException();
         }
-
         return note;
     }
 
@@ -75,11 +70,7 @@ public class NoteController {
     }
 
     @PostMapping
-    public Note save(@RequestBody Note noteCreateViewModel, BindingResult bindingResult) throws ValidationException {
-        if (bindingResult.hasErrors()) {
-            throw new ValidationException("Blad dodania note");
-        }
-
+    public Note save(@Valid @RequestBody Note noteCreateViewModel) {
         if (noteCreateViewModel.getNotebookId() != null) {
             // save note instance to db
             this.noteMenager.save(noteCreateViewModel);
