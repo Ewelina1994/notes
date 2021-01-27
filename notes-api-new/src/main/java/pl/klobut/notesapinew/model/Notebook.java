@@ -3,6 +3,9 @@ package pl.klobut.notesapinew.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -12,9 +15,11 @@ public class Notebook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(max = 20, min = 3, message = "This name is too small")
+    @NotEmpty(message = "Please enter name")
     private String name;
 
-    @OneToMany(mappedBy = "notebook", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "notebook", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Note> notes;
 
@@ -63,9 +68,6 @@ public class Notebook {
         this.notes = notes;
     }
 
-    public int getNbOfNotes() {
-        return this.notes.size();
-    }
 
     @Override
     public String toString() {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Note} from '../notes/model/note';
+import {Note} from '../model/note';
 import {ApiService} from '../shared/api.service';
 import {AlertService} from '../_alert';
 

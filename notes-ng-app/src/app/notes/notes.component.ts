@@ -1,12 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Notebook} from './model/notebook';
+import {Notebook} from '../model/notebook';
 import {ApiService} from '../shared/api.service';
-import {Note} from './model/note';
+import {Note} from '../model/note';
 import {AlertService} from '../_alert';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {NewNotebookModalComponent} from '../model-dialog-window/new-notebook-modal/new-notebook-modal.component';
 import {ConfirmDeleteService} from '../model-dialog-window/confirm-delete-modal/confirm-delete.service';
 import {NewNoteModalComponent} from '../model-dialog-window/new-note-modal/new-note-modal.component';
+import {ActivatedRoute, Route} from '@angular/router';
 
 @Component({
   selector: 'app-notes',
@@ -33,7 +34,8 @@ export class NotesComponent implements OnInit {
     keepAfterRouteChange: false
   };
 
-  constructor(private apiService: ApiService, protected alertService: AlertService, private confirmModal: ConfirmDeleteService, private modalService: BsModalService) {
+  constructor(private apiService: ApiService, protected alertService: AlertService,
+              private confirmModal: ConfirmDeleteService, private modalService: BsModalService) {
   }
 
   ngOnInit(): void {
@@ -105,6 +107,7 @@ export class NotesComponent implements OnInit {
               const indexOfNotebook = this.notebooks.indexOf(notebook);
               this.notebooks.splice(indexOfNotebook, 1);
               this.alertService.success('Notebook was successfully deleted', this.options);
+              //this.router.navigate(['note']);
             },
             error => {
               this.alertService.error('Error while delete notebook', this.options);

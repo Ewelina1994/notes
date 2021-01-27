@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../shared/auth.service';
+import {ActivatedRoute, Route} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -6,11 +8,18 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  isLoggedIn = false;
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.isUserLoggedIn();
+    console.log('menu ->' + this.isLoggedIn);
+  }
+
+  handleLogout() {
+    this.authService.logout();
   }
 
 }
