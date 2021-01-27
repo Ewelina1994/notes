@@ -19,7 +19,7 @@ public class Notebook {
     @NotEmpty(message = "Please enter name")
     private String name;
 
-    @OneToMany(mappedBy = "notebook", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "notebook", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Note> notes;
 

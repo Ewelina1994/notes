@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,16 +29,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@ComponentScan(basePackages = {"pl.klobut.notesapinew"})
-@SpringBootTest
-@AutoConfigureMockMvc
+//@RunWith(SpringRunner.class)
+//@ComponentScan(basePackages = {"pl.klobut.notesapinew"})
+//@SpringBootTest
+//@AutoConfigureMockMvc
+@WebMvcTest(NotebookController.class)
 @WithMockUser(username = "jan", password = "1234")
 public class NotebookControllerTest {
     @Autowired

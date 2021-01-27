@@ -31,8 +31,7 @@ import pl.klobut.notesapinew.model.Notebook;
 
 import java.util.Optional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -45,6 +44,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @WithMockUser(username = "jan", password = "1234", roles = "USER")
+@Sql("/test.sql")
 public class NotebookControllerIntegrationTest {
 
     @Autowired
@@ -60,12 +60,11 @@ public class NotebookControllerIntegrationTest {
     NotebookMenager notebookMenager;
 
     @Test
-    @Sql("/test.sql")
     public void getNotebookById() {
         ResponseEntity<Notebook> response = testRestTemplate.getForEntity("/api/notebooks/101", Notebook.class);
-
-        Assertions.assertEquals(101, response.getBody().getId());
-        Assertions.assertEquals("poniedziałek", response.getBody().getName());
+        Optional<Notebook> serchNotebook = notebookMenager.findById(101L);
+        Assertions.assertEquals(101, serchNotebook.get().getId());
+        Assertions.assertEquals("poniedziałek", serchNotebook.get().getName());
     }
 
     @Test
@@ -107,16 +106,35 @@ public class NotebookControllerIntegrationTest {
 
     @Test
     public void testUpdateNotebook() throws Exception {
-        Notebook existNotebook = new Notebook((long)1, "Friday");
-        Notebook savedNotebook = new Notebook(1L, "Sunday");
+        Notebook updateNotebook = new Notebook((long)102, "Friday");
 
-        Mockito.when(notebookMenager.save(existNotebook)).thenReturn(savedNotebook);
 
         String url = "/api/notebooks";
-        mockMvc.perform(post(url)
+        MvcResult mvcResult = mockMvc.perform(post(url)
                 .contentType("application/json")
-                .content(objectMapper.writeValueAsString(existNotebook))
+                .content(objectMapper.writeValueAsString(updateNotebook))
         ).andExpect(status().isOk())
-                .andDo(MockMvcResultHandlers.print());
+                .andDo(MockMvcResultHandlers.print()).andReturn();
+
+        String response = mvcResult.getResponse().getContentAsString();
+        JSONObject obj=(JSONObject) JSONValue.parse(response);
+        Integer idNotebook= (Integer) obj.get("id");
+
+        Optional<Notebook> notebook = notebookMenager.findById(Long.valueOf(idNotebook));
+
+        assertThat(notebook.get().getName()).isEqualTo(updateNotebook.getName());
+    }
+
+    @Test
+    public void testDeleteNotebook() throws Exception {
+        Long idNotebook = 101L;
+        String url = "/api/notebooks/" + idNotebook;
+
+        mockMvc.perform(delete(url)).andExpect(status().isOk());
+
+        Optional<Notebook> result = notebookMenager.findById(idNotebook);
+
+
+        assertThat(result).isNotPresent();
     }
 }
